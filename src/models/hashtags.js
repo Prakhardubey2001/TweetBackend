@@ -1,9 +1,11 @@
-const mongoose=require('mongoose');
+// const mongoose=require('mongoose');
+import mongoose from "mongoose";
 const hashtagSchema= new mongoose.Schema({
     // title of the hashtag
     title:{
         type:String,
         required:true,
+        unique:true,
     },
     // what all tweets actually belong to hashtag
     // multiple tweet id belong ot a hashtag
@@ -13,8 +15,14 @@ const hashtagSchema= new mongoose.Schema({
             ref:'Tweet',
         }
     ]
-},{timestamps:true}) 
+},{timestamps:true});
+// hashtagSchema.pre('save',function(next){
+//     this.title=this.title.toLowerCase();
+//     console.log(this);
+//     next();
+// }) 
 
 const Hashtag=mongoose.model('Hashtag',hashtagSchema);
-module.exports=Hashtag;
+export default Hashtag;
+// module.exports=Hashtag;
 
