@@ -1,63 +1,52 @@
-// const Tweet= require('../models/tweet.js');
 import Tweet from '../models/tweet.js'
-class TweetRepository  {
+import CrudRepository from './crud-repository.js';
+
+class TweetRepository extends CrudRepository {
+    constructor() {
+        super(Tweet);
+    }
     
-    async create(data){
+    async create(data) {
         try {
-            const tweet= await Tweet.create(data);
-            return tweet;
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    async get(id)
-    {
-        try {
-            const tweet= await Tweet.findById(id);
+            const tweet = await Tweet.create(data);
             return tweet;
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+            throw error;
         }
     }
-    // async update(tweetId,data) {
-    //     try {
-    //         const tweet= await Tweet.findByIdAndUpdate(tweetId,data,{new:true});
-    //         return tweet;
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-
-    // }
-    async destroy(id) {
+    async getWithComments(id) {
         try {
-            const tweet= await Tweet.findByIdAndRemove(id);
+            const tweet = await Tweet.findById(id).populate({
+                path: 'comments',
+                populate: {
+                    path: 'comments'
+                }
+            }).lean();
             return tweet;
         } catch (error) {
             console.log(error);
         }
     }
-    async getWithComments(id)
-    {
+
+    async getAll(offset, limit) {
         try {
-            const tweet=await Tweet.findById(id).populate({path:'comments'}).lean();
+            const tweet = await Tweet.find().skip(offset).limit(limit);
             return tweet;
         } catch (error) {
             console.log(error);
         }
     }
-    async getall(offset,limit) {
-        try {
-            const tweets = await Tweet.find().skip(offset).limit(limit);
-                // .populate({path:'comments'});
 
-            return tweets;
+    async find(id) {
+        try {
+            const tweet = await Tweet.findById(id).populate({path: 'likes'});
+            return tweet;
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-// module.exports = TweetRepository;
 export default TweetRepository;
