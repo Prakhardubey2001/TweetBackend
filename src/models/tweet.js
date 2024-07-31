@@ -6,6 +6,12 @@ const tweetSchema= new mongoose.Schema({
         required:[true,'Please provide content'],
         max:[250,"Tweet lenth can't be more than 250 characters"]
     },
+    likes:[
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Like'
+    }
+]
     // hashtags:[
     //     {
     //         type:mongoose.Schema.Types.ObjectId,
