@@ -1,3 +1,4 @@
+import { populate } from 'dotenv';
 import Tweet from '../models/tweet.js'
 import CrudRepository from './crud-repository.js';
 
@@ -21,7 +22,10 @@ class TweetRepository extends CrudRepository {
             const tweet = await Tweet.findById(id).populate({
                 path: 'comments',
                 populate: {
-                    path: 'comments'
+                    path: 'comments',
+                    populate:{
+                        path:'comments',
+                    }
                 }
             }).lean();
             return tweet;

@@ -64,12 +64,12 @@ app.listen(3000, async() => {
     //     name:'user01'
     // });
 
-     const tweets=await tweetRepo.getAll(0,10);
-     const users=await userRepo.getAll();
+    //  const tweets=await tweetRepo.getAll(0,10);
+    //  const users=await userRepo.getAll();
 
 
-     const likeService= new LikeService();
-    await likeService.toggleLike(tweets[0].id,'Tweet',users[0].id);
+    //  const likeService= new LikeService();
+    // await likeService.toggleLike(tweets[0].id,'Tweet',users[0].id);
 
 
 
