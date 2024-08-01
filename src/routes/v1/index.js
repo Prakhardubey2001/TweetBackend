@@ -1,4 +1,5 @@
 import express from 'express';
+import upload from '../../config/file-upload-s3-config.js';
 
 import {createTweet, getTweet} from '../../controllers/tweet-controller.js'
 import { toggleLike } from '../../controllers/like-controller.js';

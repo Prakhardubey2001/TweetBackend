@@ -24,7 +24,9 @@ comments: [
     //         ref:'Hashtag'
     //     }
     // ]
-    
+    image: {
+        type: String
+    }
 },{timestamps: true});
 
 
