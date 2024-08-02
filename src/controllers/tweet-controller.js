@@ -14,7 +14,7 @@ export const createTweet = async (req, res) => {
         //     console.log('Image url is', req.file);
         //     const payload = {...req.body};
         //     payload.image = req.file.location;
-            // const response = await tweetService.create(payload);
+        //     const response = await tweetService.create(payload);
             const response = await tweetService.create(req.body);
             return res.status(201).json({
                 success: true,
@@ -22,7 +22,7 @@ export const createTweet = async (req, res) => {
                 data: response,
                 err: {}
             });
-        // };
+        //  });
     } catch (error) {
         return res.status(500).json({
             success: false,
